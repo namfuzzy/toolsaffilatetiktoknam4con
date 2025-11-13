@@ -1,4 +1,3 @@
-
 (function(){
   if (typeof window !== 'object') return;
 
@@ -260,10 +259,12 @@
     }
   }
 
-  // ====== Nhét nút bánh răng nếu trang chưa có nút cài đặt ======
+  // ====== Nhét nút bánh răng ======
   function injectQuickGear(){
-    const maybeExisting = document.querySelector('[data-action="open-settings"],#ps-open-settings,.ps-open-settings,[title*="Cài đặt"],[aria-label*="Cài đặt"]');
-    if (maybeExisting) return;
+    // Chỉ tránh tạo trùng chính nút quick gear, còn lại giữ nguyên UI / vị trí
+    const existed = document.getElementById('ps-quick-gear');
+    if (existed) return;
+
     const btn = document.createElement('button');
     btn.id = 'ps-quick-gear';
     btn.type = 'button';

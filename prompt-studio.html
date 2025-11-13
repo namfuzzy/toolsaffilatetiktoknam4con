@@ -19,18 +19,8 @@
   <link rel="stylesheet" href="assets/css/components.css"/>
   <link rel="stylesheet" href="assets/css/pages.css"/>
 
-  <style>
-    .fab-generate{ position: fixed; right: 20px; bottom: 20px; z-index: 1000; }
-    .ps-output-panel{
-      position: fixed; right: 16px; bottom: 90px; width: 420px; max-height: 60vh;
-      background: var(--surface,#111); color: var(--text,#eee); border: 1px solid var(--border,#2a2a2a);
-      border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.35); display: none; flex-direction: column; z-index: 1001;
-    }
-    .ps-output-panel__head{ padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border,#2a2a2a); }
-    .ps-output-panel__body{ padding: 10px; }
-    .ps-output-panel__body textarea{ width: 100%; height: 320px; resize: vertical; }
-    .ps-output-panel__foot{ padding: 10px 12px; display: flex; gap: 8px; border-top: 1px solid var(--border,#2a2a2a); }
-  </style>
+  <!-- (CSS Mới cho trang này sẽ được thêm vào assets/css/pages.css sau) -->
+
 </head>
 <body class="app-layout">
   <!-- Sidebar -->
@@ -119,104 +109,204 @@
         </nav>
       </div>
 
-      <div class="header__search">
-        <i class="ri-search-line"></i>
-        <input type="text" class="header__search-input" data-i18n-placeholder="header.search"/>
+      <!-- [MỤC 2.1] CHIP TRẠNG THÁI (UI MỚI) -->
+      <div class="header__center">
+        <div class="status-chip" id="ps-status-chip" title="Cài đặt API (Sẽ làm ở bước sau)">
+            <span class="status-chip__dot gemini"></span>
+            <span class="status-chip__text">Gemini • <span id="ps-status-model">gemini-2.5-pro</span></span>
+        </div>
       </div>
 
       <div class="header__right">
-        <button class="btn btn-primary btn-create-new">
+        <!-- [MỤC 2.1] NÚT TẠO MỚI -->
+        <button class="btn btn-secondary" id="ps-btn-new">
           <i class="ri-add-line"></i>
           <span data-i18n-key="header.create">Tạo mới</span>
         </button>
         <button class="header__action-btn" data-i18n-aria-label="header.notifications">
           <i class="ri-notification-3-line"></i>
         </button>
-        <a class="header__action-btn" href="settings.html" data-i18n-aria-label="header.settings">
+        <!-- Nút Cài đặt gốc (dùng cho settings-mini.js) -->
+        <a class="header__action-btn" href="settings.html" data-i18n-aria-label="header.settings" data-action="open-settings">
           <i class="ri-settings-3-line"></i>
         </a>
         <div class="header__avatar" data-i18n-aria-label="header.account">AV</div>
       </div>
     </header>
 
+    <!-- [MỤC 2] CẤU TRÚC UI TRANG (UI MỚI) -->
     <main class="content" id="prompt-studio-root">
       <section class="page active" id="page-prompt-studio">
-        <div class="main-content-grid">
-          <div class="card">
-            <div class="card__header">
-              <h2 class="card__title" data-i18n-key="prompt.title">Trình biên tập Prompt</h2>
-            </div>
-            <div class="card__body">
-              <form action="#" id="prompt-form">
-                <div class="form-group">
-                  <label for="prompt-name" class="form-label" data-i18n-key="prompt.name">Tên Prompt</label>
-                  <input type="text" id="prompt-name" class="form-control" data-i18n-placeholder="prompt.namePlaceholder"/>
-                </div>
-
-                <div class="form-group">
-                  <label for="prompt-goal" class="form-label" data-i18n-key="prompt.goal">Mục tiêu</label>
-                  <input type="text" id="prompt-goal" class="form-control" data-i18n-placeholder="prompt.goalPlaceholder"/>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" data-i18n-key="prompt.content">Nội dung Prompt</label>
-                  <div class="editor-toolbar">
-                    <button type="button" class="editor-toolbar__btn"><b>B</b></button>
-                    <button type="button" class="editor-toolbar__btn"><i>I</i></button>
-                    <button type="button" class="editor-toolbar__btn">{ }</button>
-                  </div>
-                  <textarea id="prompt-editor" class="form-control" rows="10" data-i18n-placeholder="prompt.contentPlaceholder"></textarea>
-                </div>
-
-                <div class="form-actions">
-                  <a class="btn btn-secondary js-show-link-builder" href="affiliate-links.html?source=prompt" style="margin-right:auto;">
-                    <i class="ri-links-line"></i> <span data-i18n-key="common.insertAffLink">Chèn Link Affiliate</span>
-                  </a>
-
-                  <button type="button" class="btn btn-secondary" data-i18n-key="common.cancel">Huỷ</button>
-                  <button type="submit" class="btn btn-primary js-mock-action" data-i18n-key="common.save">Lưu Prompt</button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <aside class="sidebar-right">
-            <div class="card">
+        <div class="ps-layout">
+          
+          <!-- CỘT BÊN TRÁI: INPUT -->
+          <div class="ps-layout__main">
+            
+            <!-- [MỤC 2.2] PRESET & MỤC TIÊU -->
+            <div class="card" id="ps-preset-card">
               <div class="card__header">
-                <h3 class="card__title" data-i18n-key="prompt.presets">Mẫu có sẵn (Preset)</h3>
+                <h2 class="card__title" data-i18n-key="ps.presetTitle">Preset & Mục tiêu</h2>
               </div>
               <div class="card__body">
-                <ul class="sidebar__nav-list">
-                  <li><a class="sidebar__nav-link" href="#"><i class="ri-file-text-line"></i> <span>Kịch bản TikTok</span></a></li>
-                  <li><a class="sidebar__nav-link" href="#"><i class="ri-file-text-line"></i> <span>Tiêu đề Facebook</span></a></li>
-                  <li><a class="sidebar__nav-link" href="#"><i class="ri-file-text-line"></i> <span>Mô tả Video</span></a></li>
-                </ul>
+                <div class="form-grid">
+                  <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="ps-preset" class="form-label" data-i18n-key="ps.preset">Preset (Công thức)</label>
+                    <select id="ps-preset" class="form-control">
+                      <option value="" data-i18n-key="ps.presetSelect">-- Vui lòng chọn Preset --</option>
+                      <!-- JS sẽ điền phụ lục vào đây -->
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="ps-voice" class="form-label" data-i18n-key="ps.voice">Giọng điệu</label>
+                    <select id="ps-voice" class="form-control">
+                      <option value="Chuyên gia">Chuyên gia</option>
+                      <option value="Gen Z">Gen Z</option>
+                      <option value="Hài hước">Hài hước</option>
+                      <option value="Ấm áp">Ấm áp</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="ps-angle" class="form-label" data-i18n-key="ps.angle">Góc tiếp cận</label>
+                    <select id="ps-angle" class="form-control">
+                      <option value="Giá trị">Giá trị</option>
+                      <option value="Tiện lợi">Tiện lợi</option>
+                      <option value="Tiết kiệm">Tiết kiệm</option>
+                      <option value="So sánh">So sánh</option>
+                      <option value="Đập tan nghi ngờ">Đập tan nghi ngờ</option>
+                    </select>
+                  </div>
+                   <div class="form-group">
+                    <label for="ps-variants" class="form-label" data-i18n-key="ps.variants">Số biến thể (A/B)</label>
+                    <select id="ps-variants" class="form-control">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                   <div class="form-group">
+                    <label for="ps-length" class="form-label" data-i18n-key="ps.length">Độ dài</label>
+                    <select id="ps-length" class="form-control">
+                      <option value="Ngắn">Ngắn</option>
+                      <option value="Vừa">Vừa (Mặc định)</option>
+                      <option value="Dài">Dài</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
-          </aside>
+
+            <!-- [MỤC 2.3] BIẾN ĐẦU VÀO (FIELDS) -->
+            <div class="card" id="ps-fields-card">
+              <div class="card__header">
+                <h2 class="card__title" data-i18n-key="ps.fieldsTitle">Biến đầu vào</h2>
+              </div>
+              <div class="card__body">
+                <div class="form-grid" id="ps-fields-container">
+                  <!-- JS sẽ điền các field (product_name, target_audience, v.v.) vào đây -->
+                  <div class="ps-field-placeholder" data-i18n-key="ps.fieldsPlaceholder">
+                    Vui lòng chọn một Preset ở trên để hiển thị các trường nhập liệu.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- [MỤC 2.4] ẢNH ĐẦU VÀO (IMAGE ASSIST) -->
+            <div class="card" id="ps-image-card">
+              <div class="card__header">
+                <h2 class="card__title" data-i18n-key="ps.imageTitle">Hỗ trợ bằng ảnh (Image Assist)</h2>
+                <button class="btn btn-secondary btn-sm" id="ps-image-add-btn">
+                    <i class="ri-image-add-line"></i> <span data-i18n-key="ps.imageAdd">Thêm ảnh</span>
+                </button>
+              </div>
+              <div class="card__body">
+                <input type="file" id="ps-image-input" multiple accept="image/*" style="display:none;">
+                
+                <!-- Khu vực kéo thả & thumbnails -->
+                <div class="ps-image-dropzone" id="ps-image-dropzone">
+                  <i class="ri-upload-cloud-2-line"></i>
+                  <p data-i18n-key="ps.imageDrop">Kéo & thả (tối đa 4 ảnh) vào đây, hoặc nhấn "Thêm ảnh"</p>
+                </div>
+                <div class="ps-image-preview-grid" id="ps-image-preview-grid">
+                  <!-- JS sẽ điền các thumbnail ảnh vào đây -->
+                </div>
+
+                <!-- Tùy chọn ảnh -->
+                <div class="ps-image-options" id="ps-image-options" style="display: none;">
+                  <div class="form-group-inline">
+                    <input type="checkbox" id="ps-image-ocr" class="form-checkbox">
+                    <label for="ps-image-ocr" data-i18n-key="ps.imageOcr">Đọc chữ trong ảnh (OCR)</label>
+                  </div>
+                  <div class="form-group" style="margin-top: 1rem;">
+                    <label class="form-label" data-i18n-key="ps.imageMode">Chế độ dùng ảnh:</label>
+                    <select id="ps-image-mode" class="form-control">
+                      <option value="merge_all" data-i18n-key="ps.imageModeMerge">Gộp tất cả ảnh &rarr; 1 kịch bản</option>
+                      <option value="single_to_multiple" data-i18n-key="ps.imageModeSingle">1 ảnh = 1 biến thể</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- [MỤC 2.5] NÚT GENERATE -->
+            <div class="ps-generate-footer">
+                <button class="btn btn-primary btn-lg" id="ps-btn-generate">
+                    <i class="ri-magic-line"></i>
+                    <span data-i18n-key="ps.generate">Generate (Ctrl+Enter)</span>
+                </button>
+            </div>
+
+          </div>
+          
+          <!-- CỘT BÊN PHẢI: OUTPUT -->
+          <div class="ps-layout__side" id="ps-output-container">
+            
+            <!-- [MỤC 2.6] KẾT QUẢ -->
+            <div class="card sticky-top">
+              <div class="card__header">
+                <h2 class="card__title" data-i18n-key="ps.resultsTitle">Kết quả</h2>
+                <div class="ps-output-actions" id="ps-output-actions" style="display: none;">
+                  <button class="btn btn-secondary btn-sm" id="ps-output-copy-all">
+                    <i class="ri-file-copy-2-line"></i> <span data-i18n-key="ps.copyAll">Copy tất cả</span>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Tabs Kết quả -->
+              <nav class="tabs__nav" id="ps-output-tabs-nav" style="display: none;">
+                <!-- JS sẽ điền các tab (Script, Caption, JSON...) vào đây -->
+              </nav>
+
+              <!-- Body Kết quả -->
+              <div class="card__body" id="ps-output-body">
+                
+                <!-- Trạng thái rỗng (mục 2.6) -->
+                <div class="ps-output-empty" id="ps-output-empty">
+                  <i class="ri-file-list-3-line"></i>
+                  <p data-i18n-key="ps.resultsEmpty">Kết quả sẽ xuất hiện ở đây sau khi bạn Generate.</p>
+                </div>
+
+                <!-- Khu vực chứa các tab content -->
+                <div id="ps-output-tabs-content">
+                  <!-- JS sẽ điền các .tabs__content (Script, Caption, JSON...) vào đây -->
+                </div>
+              </div>
+              
+              <!-- [MỤC 5] GHI CHÚ COMPLIANCE -->
+              <div class="card__footer" id="ps-output-footer" style="display: none;">
+                  <p class="ps-compliance-note" data-i18n-key="ps.complianceNote">
+                    Ưu tiên lợi ích; hook 3-5s; CTA rõ; không claim quá đà; #quangcao #affiliate khi phù hợp.
+                  </p>
+              </div>
+            </div>
+            
+          </div>
+
         </div>
       </section>
     </main>
-
-    <div class="fab-generate">
-      <button id="btn-generate" class="btn btn-primary btn-generate">
-        <i class="ri-magic-line"></i> Generate (Ctrl+Enter)
-      </button>
-    </div>
-
-    <div class="ps-output-panel" id="ps-output-panel" aria-live="polite">
-      <div class="ps-output-panel__head">
-        <strong>Kết quả (JSON)</strong>
-        <button class="btn btn-secondary btn-sm" id="ps-output-close"><i class="ri-close-line"></i></button>
-      </div>
-      <div class="ps-output-panel__body">
-        <textarea class="form-control" id="ps-output" placeholder="Đang tạo prompt..."></textarea>
-      </div>
-      <div class="ps-output-panel__foot">
-        <button class="btn btn-secondary" id="ps-output-copy"><i class="ri-file-copy-2-line"></i> Copy JSON</button>
-        <button class="btn" id="ps-output-download"><i class="ri-download-2-line"></i> Tải .json</button>
-      </div>
-    </div>
 
     <footer class="footer">
       <span data-i18n-key="footer.copyright">© 2025 Affitok Win. Mọi quyền được bảo lưu.</span> | v3.0.0
@@ -234,21 +324,23 @@
 
   <!-- ENV + KV (cấu hình) -->
   <script src="./assets/js/core/env.js?v=3"></script>
-  <script src="./assets/js/core/kv.js?v=3"></script>
+  <!-- [YÊU CẦU 3] Dùng file kv.js được cung cấp -->
+  <script src="./assets/js/core/kv.js?v=3"></script> 
 
-    <!-- Network helpers (defines robustFetch) -->
+  <!-- Network helpers (defines robustFetch) -->
   <script src="./assets/js/core/net-patch.js?v=3"></script>
-<!-- Services: proxy phải trước settings-mini để có robustFetch -->
+  <!-- Services: proxy phải trước settings-mini để có robustFetch -->
   <script src="./assets/js/services/proxy.js?v=3"></script>
 
   <!-- Settings mini (dùng robustFetch) -->
+  <!-- [YÊU CẦU 0] KHÔNG CAN THIỆP FILE NÀY -->
   <script src="./assets/js/core/settings-mini.js?v=3"></script>
 
-  <!-- Model services -->
+  <!-- Model services (Không can thiệp logic gọi API) -->
   <script src="./assets/js/services/gemini.js?v=3"></script>
   <script src="./assets/js/services/perplexity.js?v=3"></script>
 
-  <!-- Page logic -->
+  <!-- Page logic (File này sẽ được code ở Bước 2) -->
   <script src="./assets/js/pages/prompt-studio.js?v=3"></script>
   <!-- ==== /BOOTSTRAP SCRIPTS ==== -->
 </body>

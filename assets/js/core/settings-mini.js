@@ -179,11 +179,11 @@
   // ====== Gọi GAS để lấy models (Gemini) ======
   async function postListModels(provider){
     // [SỬA LỖI] Đọc từ input TRỰC TIẾP trong popup, không phải getProxyUrl()
-    const proxyUrl = getInputValue([ID_MAP.proxy]) || loadKV(PS_K.proxy);
-    const apiKey   = getInputValue([ID_MAP.gemini]) || loadKV(PS_K.gemini);
+    const proxyUrl = (getInputValue([ID_MAP.proxy]) || '').trim() || loadKV(PS_K.proxy) || '';
+    const apiKey = (getInputValue([ID_MAP.gemini]) || '').trim() || loadKV(PS_K.gemini) || '';
   
-    if (!proxyUrl) return { ok:false, error:'Missing proxyUrl' }; // LỖI Ở ĐÂY
-    if (!apiKey)   return { ok:false, error:'Missing apiKey' };
+    if (!proxyUrl || proxyUrl.trim() === '') return { ok:false, error:'Missing proxyUrl' }; // LỖI ĐÃ FIX: Kiểm tra chặt hơn
+    if (!apiKey || apiKey.trim() === '') return { ok:false, error:'Missing apiKey' };
 
     const payload = {
       provider,

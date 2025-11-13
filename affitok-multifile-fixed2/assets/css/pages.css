@@ -1,0 +1,492 @@
+body.light-mode {
+            --bg: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --card: #ffffff;
+            --card-secondary: #f8fafc; /* Nền input */
+            --text: #334155;
+            --text-heading: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+            color: var(--text-heading);
+        }
+
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.5rem; }
+        h3 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--muted);
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: var(--border);
+            margin: 1.5rem 0;
+        }
+
+
+/* Ẩn tất cả các trang theo mặc định */
+        .page { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Layout 2 cột chung */
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+        }
+        @media (max-width: 1200px) {
+            .main-content-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Dashboard & Aff-Dashboard */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; }
+        .stat-card__icon { font-size: 2.5rem; padding: 1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .stat-card__icon.primary { background-color: rgba(34, 211, 238, 0.1); color: var(--primary); }
+        .stat-card__icon.accent { background-color: rgba(139, 92, 246, 0.1); color: var(--accent); }
+        .stat-card__icon.success { background-color: rgba(34, 197, 94, 0.1); color: var(--success); }
+        .stat-card__icon.danger { background-color: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        .stat-card__info-title { font-size: 0.9rem; color: var(--muted); margin: 0; }
+        .stat-card__info-value { font-size: 2rem; font-weight: 700; color: var(--text-heading); margin: 0; }
+        .chart-placeholder {
+            height: 350px;
+            background-color: var(--card);
+            border: 1px dashed var(--border);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Prompt Studio */
+        .editor-toolbar { display: flex; gap: 0.5rem; padding: 0.5rem; background-color: var(--card-secondary); border: 1px solid var(--border); border-bottom: none; border-top-left-radius: var(--border-radius); border-top-right-radius: var(--border-radius); }
+        .editor-toolbar__btn { background-color: var(--border); color: var(--text); border: none; width: 36px; height: 36px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .editor-toolbar__btn:hover { background-color: var(--muted); }
+        textarea#prompt-editor { border-top-left-radius: 0; border-top-right-radius: 0; min-height: 400px; }
+        
+        /* TikTok Uploader */
+        .drag-drop-area {
+            border: 2px dashed var(--border);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            background-color: var(--card-secondary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .drag-drop-area.drag-over {
+            border-color: var(--primary);
+            background-color: var(--bg);
+        }
+        .drag-drop-area__icon { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+        .drag-drop-area p { color: var(--text-heading); font-weight: 500; margin-bottom: 0.5rem; }
+        .drag-drop-area span { color: var(--muted); font-size: 0.9rem; }
+        #file-upload-input { display: none; }
+        #video-preview { margin-top: 1.5rem; }
+        #video-preview-player { width: 100%; border-radius: var(--border-radius); background-color: #000; }
+        
+        /* Scheduler (Lịch) */
+        .calendar {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius);
+        }
+        .calendar__header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); }
+        .calendar__title { margin: 0; font-size: 1.25rem; }
+        .calendar__nav { display: flex; gap: 0.5rem; }
+        .calendar__weekdays { display: grid; grid-template-columns: repeat(7, 1fr); background-color: var(--bg); }
+        .calendar__weekday { padding: 0.75rem; text-align: center; font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+        .calendar__days { display: grid; grid-template-columns: repeat(7, 1fr); }
+        .calendar__day {
+            padding: 1rem;
+            min-height: 120px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .calendar__day:nth-child(7n) { border-right: none; }
+        .calendar__day.other-month { background-color: var(--bg); opacity: 0.5; }
+        .calendar__day:hover { background-color: var(--bg); }
+        .calendar__day-num { font-weight: 600; }
+        .calendar__event {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .calendar__event.fb { background-color: rgba(59, 89, 152, 0.2); color: #adc0de; }
+        .calendar__event.tk { background-color: rgba(255, 0, 80, 0.2); color: #ff99b9; }
+        .calendar__event.aff { background-color: rgba(34, 197, 94, 0.2); color: var(--success); }
+
+        /* Settings */
+        .settings-item { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
+        .settings-item:last-child { border-bottom: none; }
+        .settings-item__label { font-weight: 500; color: var(--text-heading); }
+        .settings-item__desc { font-size: 0.9rem; color: var(--muted); margin: 0; }
+        
+        /* Affiliate Assets */
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .asset-card {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        .asset-card__preview {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-secondary);
+        }
+        .asset-card__preview img { height: 100%; width: 100%; object-fit: contain; }
+        .asset-card__info { padding: 1rem; }
+        .asset-card__title { font-size: 1rem; font-weight: 600; color: var(--text-heading); margin-bottom: 0.5rem; }
+        .asset-card__desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
+        .asset-card__actions { display: flex; gap: 0.5rem; }
+
+  /* === (MỚI) CSS CHO PROMPT STUDIO UI (v3) - ĐÃ GỘP SỬA LỖI === */
+
+/* [MỤC 2.1] Chip trạng thái header */
+.header__center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+}
+.status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--card-secondary);
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: help;
+}
+.status-chip__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--success); /* Mặc định là xanh */
+    animation: pulse 2s infinite;
+}
+.status-chip__dot.gemini { background-color: var(--accent); }
+.status-chip__dot.error { background-color: var(--danger); animation: none; }
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* [MỤC 2] Layout 2 cột mới */
+.ps-layout {
+    display: grid;
+    grid-template-columns: 1fr 420px; /* Cột chính | Cột output */
+    gap: 1.5rem;
+}
+.ps-layout__main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* [SỬA LỖI CUỘN] Gỡ bỏ 'sticky' và 'max-height' */
+.ps-layout__side .sticky-top {
+    position: static; /* Gỡ bỏ 'sticky' */
+    max-height: none; /* Gỡ bỏ giới hạn chiều cao */
+}
+.ps-layout__side .card {
+    max-height: none; /* Gỡ bỏ giới hạn chiều cao */
+    display: flex;
+    flex-direction: column;
+}
+.ps-layout__side .card__body {
+    overflow-y: visible; /* Tắt thanh cuộn bên trong card */
+    flex-grow: 1;
+}
+/* HẾT SỬA LỖI CUỘN */
+
+@media (max-width: 1200px) {
+    /* Chuyển 1 cột trên tablet/mobile */
+    .ps-layout {
+        grid-template-columns: 1fr;
+    }
+    .ps-layout__side .sticky-top,
+    .ps-layout__side .card {
+        position: static;
+        top: auto;
+        max-height: none;
+    }
+}
+
+/* [MỤC 2.2] Grid trong card Preset */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+}
+@media (max-width: 480px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* 1 cột trên mobile */
+        gap: 1rem;
+    }
+}
+
+/* [MỤC 2.3] Placeholder cho Fields */
+.ps-field-placeholder {
+    padding: 2rem;
+    text-align: center;
+    color: var(--muted);
+    border: 2px dashed var(--border);
+    border-radius: var(--border-radius);
+    background-color: var(--bg);
+}
+
+/* [MỤC 2.4] Image Assist */
+.ps-image-dropzone {
+    border: 2px dashed var(--border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--bg);
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 120px;
+}
+.ps-image-dropzone:hover,
+.ps-image-dropzone.drag-over {
+    border-color: var(--primary);
+    background-color: var(--card-secondary);
+    color: var(--primary);
+}
+.ps-image-dropzone i {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+.ps-image-dropzone p {
+    color: var(--text);
+    font-weight: 500;
+    margin: 0;
+}
+
+.ps-image-preview-grid {
+    display: none; /* Ẩn mặc định */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.ps-image-thumbnail {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 1 / 1;
+}
+.ps-image-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ps-image-remove-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+.ps-image-thumbnail:hover .ps-image-remove-btn {
+    opacity: 1;
+    background-color: var(--danger);
+}
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.form-checkbox {
+    width: 18px;
+    height: 18px;
+}
+
+/* [MỤC 2.5] Nút Generate */
+.ps-generate-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem; /* (thay cho 1.5rem của .card) */
+}
+.btn-lg {
+    padding: 0.85rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.btn-lg i {
+    font-size: 1.3rem;
+}
+/* Trạng thái loading/disabled cho nút Generate */
+#ps-btn-generate:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--border);
+    color: var(--muted);
+}
+#ps-btn-generate:disabled:hover {
+    opacity: 0.6;
+    background-color: var(--border);
+    color: var(--muted);
+}
+
+/* [MỤC 2.6] Khu vực Output */
+.ps-output-empty {
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--muted);
+}
+.ps-output-empty i {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+}
+
+/* [MỤC 3.2] Card kết quả (Văn bản thuần) */
+.ps-result-card {
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+.ps-result-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--card-secondary);
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+}
+.ps-result-card p {
+    padding: 1rem;
+    margin: 0;
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 0.95rem; /* [MỤC 3.2] Chữ dễ đọc */
+    white-space: pre-wrap; /* Giữ các dấu xuống dòng */
+}
+
+/* [MỤC 3.1] Card kết quả (JSON) */
+.ps-result-card-json {
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    overflow: hidden; /* Cho pre/code */
+}
+.ps-result-card-json .ps-result-card-header {
+    background-color: var(--card-secondary);
+}
+.ps-result-card-json pre {
+    padding: 1rem;
+    margin: 0;
+    overflow-x: auto;
+    background-color: var(--bg);
+}
+.ps-result-card-json code {
+    color: var(--text);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    white-space: pre; /* Giữ nguyên indent */
+}
+
+/* [MỤC 5] Ghi chú Compliance */
+.ps-compliance-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0;
+    padding: 0.5rem;
+    background-color: var(--bg);
+    border-radius: var(--border-radius);
+    border: 1px dashed var(--border);
+    text-align: center;
+}

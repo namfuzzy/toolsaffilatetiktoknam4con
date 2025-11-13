@@ -1,0 +1,4 @@
+const express=require("express");const fetch=(...a)=>import('node-fetch').then(({default:fetch})=>fetch(...a));
+const app=express();const PORT=process.env.PORT||5174;app.use(express.json({limit:"10mb"}));
+app.post("/gemini/generate",async(req,res)=>{try{const key=process.env.GOOGLE_API_KEY;const model=process.env.GEMINI_MODEL||"gemini-2.0-flash";if(!key)return res.status(400).json({error:"Missing GOOGLE_API_KEY"});const url=`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(req.body)});const body=await r.text();res.status(r.status).send(body);}catch(e){res.status(500).json({error:e.message});}});
+app.listen(PORT,()=>console.log("Dev proxy http://localhost:"+PORT));

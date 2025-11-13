@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affitok Win - Báo cáo Affiliate</title>
+
+    <!-- Phông chữ Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Thư viện Icon (Remix Icon) -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/global.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+
+</head>
+<body class="app-layout">
+ <!-- Thêm class 'light-mode' vào đây để test chế độ sáng -->
+
+    <!-- Thanh bên trái -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar__logo">
+            <i class="ri-rocket-2-fill sidebar__logo-icon"></i>
+            <span class="sidebar__logo-text">Affitok Win</span>
+        </div>
+
+        <nav class="sidebar__nav">
+            <!-- Nhóm 1: Core -->
+            <div class="sidebar__nav-group">
+                <h3 class="sidebar__nav-title" data-i18n-key="sidebar.group.core">Chức năng chính</h3>
+                <ul class="sidebar__nav-list">
+                    <li><a class="sidebar__nav-link" href="index.html" data-page-id="dashboard"><i class="ri-dashboard-3-line"></i><span data-i18n-key="sidebar.dashboard">Tổng quan</span></a></li>
+                    <li><a class="sidebar__nav-link" href="prompt-studio.html" data-page-id="prompt-studio"><i class="ri-quill-pen-line"></i><span data-i18n-key="sidebar.promptStudio">Prompt Studio</span></a></li>
+                    <li><a class="sidebar__nav-link" href="video-factory.html" data-page-id="video-factory"><i class="ri-movie-2-line"></i><span data-i18n-key="sidebar.videoFactory">Video Factory</span></a></li>
+                </ul>
+            </div>
+            
+            <!-- Nhóm 2: Đăng bài -->
+             <div class="sidebar__nav-group">
+                <h3 class="sidebar__nav-title" data-i18n-key="sidebar.group.posting">Đăng bài</h3>
+                <ul class="sidebar__nav-list">
+                    <li><a class="sidebar__nav-link" href="facebook-poster.html" data-page-id="facebook-poster"><i class="ri-facebook-box-line"></i><span data-i18n-key="sidebar.fbPoster">Đăng Facebook</span></a></li>
+                    <li><a class="sidebar__nav-link" href="tiktok-uploader.html" data-page-id="tiktok-uploader"><i class="ri-tiktok-line"></i><span data-i18n-key="sidebar.tkUploader">Đăng TikTok</span></a></li>
+                    <li><a class="sidebar__nav-link" href="scheduler.html" data-page-id="scheduler"><i class="ri-calendar-event-line"></i><span data-i18n-key="sidebar.scheduler">Lịch đăng</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Nhóm 3: Affiliate (MỚI) -->
+             <div class="sidebar__nav-group">
+                <h3 class="sidebar__nav-title" data-i18n-key="sidebar.group.affiliate">Affiliate</h3>
+                <ul class="sidebar__nav-list">
+                    <li><a class="sidebar__nav-link" href="affiliate-dashboard.html" data-page-id="affiliate-dashboard"><i class="ri-pie-chart-line"></i><span data-i18n-key="sidebar.affDashboard">Tổng quan (Aff)</span></a></li>
+                    <li><a class="sidebar__nav-link" href="affiliate-campaigns.html" data-page-id="affiliate-campaigns"><i class="ri-megaphone-line"></i><span data-i18n-key="sidebar.affCampaigns">Chiến dịch</span></a></li>
+                    <li><a class="sidebar__nav-link" href="affiliate-links.html" data-page-id="affiliate-links"><i class="ri-links-line"></i><span data-i18n-key="sidebar.affLinks">Trình tạo Link</span></a></li>
+                    <li><a class="sidebar__nav-link" href="affiliate-reports.html" data-page-id="affiliate-reports"><i class="ri-file-chart-line"></i><span data-i18n-key="sidebar.affReports">Báo cáo</span></a></li>
+                    <li><a class="sidebar__nav-link" href="affiliate-payouts.html" data-page-id="affiliate-payouts"><i class="ri-wallet-3-line"></i><span data-i18n-key="sidebar.affPayouts">Thanh toán</span></a></li>
+                    <li><a class="sidebar__nav-link" href="affiliate-assets.html" data-page-id="affiliate-assets"><i class="ri-image-line"></i><span data-i18n-key="sidebar.affAssets">Tài nguyên</span></a></li>
+                    <li><a class="sidebar__nav-link" href="affiliate-networks.html" data-page-id="affiliate-networks"><i class="ri-global-line"></i><span data-i18n-key="sidebar.affNetworks">Mạng liên kết</span></a></li>
+                    <li><a class="sidebar__nav-link" href="affiliate-compliance.html" data-page-id="affiliate-compliance"><i class="ri-shield-check-line"></i><span data-i18n-key="sidebar.affCompliance">Tuân thủ</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Nhóm 4: Quản lý -->
+             <div class="sidebar__nav-group">
+                <h3 class="sidebar__nav-title" data-i18n-key="sidebar.group.management">Quản lý</h3>
+                <ul class="sidebar__nav-list">
+                    <li><a class="sidebar__nav-link" href="templates.html" data-page-id="templates"><i class="ri-layout-grid-line"></i><span data-i18n-key="sidebar.templates">Mẫu nội dung</span></a></li>
+                    <li><a class="sidebar__nav-link" href="library.html" data-page-id="library"><i class="ri-gallery-line"></i><span data-i18n-key="sidebar.library">Thư viện</span></a></li>
+                    <li><a class="sidebar__nav-link" href="analytics.html" data-page-id="analytics"><i class="ri-bar-chart-2-line"></i><span data-i18n-key="sidebar.analytics">Báo cáo (MXH)</span></a></li>
+                </ul>
+            </div>
+            
+             <!-- Nhóm 5: Hệ thống -->
+             <div class="sidebar__nav-group">
+                <h3 class="sidebar__nav-title" data-i18n-key="sidebar.group.system">Hệ thống</h3>
+                <ul class="sidebar__nav-list">
+                    <li><a class="sidebar__nav-link" href="accounts.html" data-page-id="accounts"><i class="ri-account-box-line"></i><span data-i18n-key="sidebar.accounts">Tài khoản kết nối</span></a></li>
+                    <li><a class="sidebar__nav-link" href="logs.html" data-page-id="logs"><i class="ri-bug-line"></i><span data-i18n-key="sidebar.logs">Nhật ký & Lỗi</span></a></li>
+                    <li><a class="sidebar__nav-link" href="settings.html" data-page-id="settings"><i class="ri-settings-3-line"></i><span data-i18n-key="sidebar.settings">Cài đặt</span></a></li>
+                    <li><a class="sidebar__nav-link" href="help.html" data-page-id="help"><i class="ri-question-line"></i><span data-i18n-key="sidebar.help">Trợ giúp</span></a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="sidebar__footer">
+            Affitok Win v3.0.0<br>
+            © 2025
+        </div>
+    </aside>
+    
+    <!-- Lớp phủ cho sidebar mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Nội dung chính -->
+    <div class="main-container">
+        <!-- Thanh tiêu đề (Header) -->
+        <header class="header" id="header">
+            <div class="header__left">
+                <button class="header__menu-toggle" id="menu-toggle" aria-label="Mở menu">
+                    <i class="ri-menu-2-line"></i>
+                </button>
+                
+                <!-- Breadcrumbs -->
+                <nav class="breadcrumb" id="breadcrumb">
+                    <span class="breadcrumb__item" data-i18n-key="breadcrumb.home">Affitok</span>
+                    <i class="ri-arrow-right-s-line breadcrumb__divider"></i>
+                    <span class="breadcrumb__item" id="breadcrumb-current" data-i18n-key="sidebar.dashboard">Tổng quan</span>
+                </nav>
+            </div>
+
+            <div class="header__search">
+                <i class="ri-search-line"></i>
+                <input type="text" class="header__search-input" data-i18n-placeholder="header.search">
+            </div>
+
+            <div class="header__right">
+                <button class="btn btn-primary btn-create-new">
+                    <i class="ri-add-line"></i>
+                    <span data-i18n-key="header.create">Tạo mới</span>
+                </button>
+                <button class="header__action-btn" data-i18n-aria-label="header.notifications">
+                    <i class="ri-notification-3-line"></i>
+                </button>
+                 <button class="header__action-btn" href="settings.html" data-i18n-aria-label="header.settings">
+                    <i class="ri-settings-3-line"></i>
+                </button>
+                <div class="header__avatar" data-i18n-aria-label="header.account">
+                    AV
+                </div>
+            </div>
+        </header>
+
+        <!-- Khu vực nội dung (thay đổi theo trang) -->
+        
+<main class="content">
+<section class="page active" id="page-affiliate-reports">
+                <div class="card">
+                    <div class="card__header">
+                         <h2 class="card__title" data-i18n-key="sidebar.affReports">Báo cáo Affiliate</h2>
+                         <div class="form-actions" style="margin: 0;">
+                            <button class="btn btn-secondary"><i class="ri-filter-3-line"></i> <span data-i18n-key="common.filter">Lọc</span></button>
+                             <button class="btn btn-secondary"><i class="ri-download-2-line"></i> <span data-i18n-key="common.export">Xuất CSV</span></button>
+                         </div>
+                    </div>
+                    <div class="card__body">
+                        <nav class="tabs__nav" id="aff-reports-tabs-nav">
+                            <button class="tabs__btn active" data-tab="overview" data-i18n-key="affReports.tabs.overview">Tổng quan</button>
+                            <button class="tabs__btn" data-tab="campaign" data-i18n-key="affReports.tabs.campaign">Theo Chiến dịch</button>
+                            <button class="tabs__btn" data-tab="source" data-i18n-key="affReports.tabs.source">Theo Nguồn (Sub1)</button>
+                            <button class="tabs__btn" data-tab="link" data-i18n-key="affReports.tabs.link">Theo Link</button>
+                        </nav>
+                        
+                        <div class="tabs__content active" id="tab-overview">
+                            <div class="table-wrapper">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th data-i18n-key="affReports.table.date">Ngày</th>
+                                            <th data-i18n-key="affReports.table.clicks">Clicks</th>
+                                            <th data-i18n-key="affReports.table.leads">Leads</th>
+                                            <th data-i18n-key="affReports.table.approvals">Duyệt</th>
+                                            <th data-i18n-key="affReports.table.rejects">Từ chối</th>
+                                            <th data-i18n-key="affReports.table.revenue">Doanh thu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="aff-reports-list-body">
+                                        <!-- JS render mock data -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tabs__content" id="tab-campaign">
+                             <p data-i18n-key="affReports.tabs.campaignDesc">(Bảng báo cáo theo chiến dịch...)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+</main>
+
+
+        <!-- Chân trang (Footer) -->
+        <footer class="footer">
+            <span data-i18n-key="footer.copyright">© 2025 Affitok Win. Mọi quyền được bảo lưu.</span> | v3.0.0
+        </footer>
+    </div>
+    
+    <!-- === KHU VỰC ẨN: MODALS & DRAWERS === -->
+    
+    <!-- Modal (Chung) -->
+    <div class="modal__wrapper" id="modal-wrapper">
+        <div class="modal" id="modal-main">
+            <div class="modal__header">
+                <h3 class="modal__title" id="modal-title" data-i18n-key="modal.title">Thông báo</h3>
+                <button class="btn-icon modal__close js-modal-close"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="modal__body">
+                <p id="modal-message" data-i18n-key="modal.actionSuccess">Hành động đã được thực hiện thành công (đây là thông báo giả).</p>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn-secondary js-modal-close" data-i18n-key="common.close">Đóng</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal (Kết nối Mạng Aff) (MỚI) -->
+    <div class="modal__wrapper" id="modal-connect-network">
+        <div class="modal">
+            <div class="modal__header">
+                <h3 class="modal__title" data-i18n-key="affNetworks.connect">Kết nối mạng mới</h3>
+                <button class="btn-icon modal__close js-modal-close"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="modal__body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n-key="affNetworks.table.name">Tên mạng</label>
+                        <select class="form-control">
+                            <option>AccessTrade</option>
+                            <option>AdFlex</option>
+                            <option>MasOffer</option>
+                            <option>Khác...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n-key="affNetworks.apiKey">API Key / Token</label>
+                        <input type="text" class="form-control" data-i18n-placeholder="affNetworks.apiKeyPlaceholder">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn-secondary js-modal-close" data-i18n-key="common.cancel">Huỷ</button>
+                <button class="btn btn-primary js-mock-action" data-i18n-key="affNetworks.connectBtn">Kết nối</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Drawer (Chi tiết Chiến dịch) (MỚI) -->
+    <div class="drawer__wrapper" id="drawer-campaign-details">
+        <div class="drawer">
+            <div class="drawer__header">
+                <h3 class="drawer__title" data-i18n-key="affCampaigns.detailsTitle">Chi tiết Chiến dịch</h3>
+                <button class="btn-icon drawer__close js-drawer-close"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="drawer__body">
+                <h2 id="drawer-campaign-name">Shopee 11.11 Siêu Sale</h2>
+                <p><strong>Mạng:</strong> AccessTrade</p>
+                <p><strong>Hoa hồng:</strong> 5% / CPS</p>
+                <hr>
+                <h4 data-i18n-key="affCampaigns.desc">Mô tả</h4>
+                <p data-i18n-key="affCampaigns.descText">(Mô tả chi tiết về chiến dịch, sản phẩm áp dụng...)</p>
+                <h4 data-i18n-key="affCampaigns.conditions">Điều kiện chấp nhận</h4>
+                <p data-i18n-key="affCampaigns.conditionsText">(Cookie 30 ngày, không re-occur...)</p>
+                <h4 data-i18n-key="affCampaigns.landing">Landing Page mẫu</h4>
+                <p><a href="#">https://shopee.vn/11-11</a></p>
+            </div>
+            <div class="drawer__footer">
+                <button class="btn btn-secondary js-drawer-close" data-i18n-key="common.close">Đóng</button>
+                <button class="btn btn-primary js-show-link-builder" data-i18n-key="common.getLink">Lấy Link</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast__container" id="toast-container">
+    </div>
+
+    
+<script src="assets/mock/i18n.js"></script>
+<script src="assets/mock/api.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/pages/affiliate-reports.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initAffReportsPage);</script>
+<script>window.__PAGE_ID__ = 'affiliate-reports';</script>
+<script src="./assets/js/core/mock-actions.js"></script>
+<script src="./assets/js/core/nav.js"></script>
+<script src="./assets/js/core/theme.js"></script>
+<script src="./assets/js/core/i18n.js"></script>
+</body>
+</html>

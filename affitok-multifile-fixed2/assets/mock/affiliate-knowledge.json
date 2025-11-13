@@ -1,0 +1,41 @@
+{
+  "guidelines": [
+    {
+      "title": "KPI chung",
+      "points": [
+        "Hook < 3s, CTA rõ ràng",
+        "Nêu lợi ích trước tính năng",
+        "2-3 bằng chứng/xác thực (đánh giá, chứng chỉ, bảo hành)",
+        "Đề cập SubID để tracking nếu có"
+      ]
+    },
+    {
+      "title": "Compliance cơ bản",
+      "points": [
+        "Không hứa hẹn quá mức, không claim y tế",
+        "Tuân thủ chính sách mạng liên kết (AT/AdFlex/MO)",
+        "Hashtag/Disclosure: #quangcao #affiliate"
+      ]
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "PAS"
+    },
+    {
+      "name": "AIDA"
+    },
+    {
+      "name": "BAB"
+    }
+  ],
+  "compliance": [
+    "Tránh dùng từ ngữ so sánh tuyệt đối nếu không có dẫn chứng",
+    "Không sử dụng thương hiệu đối thủ trực tiếp"
+  ],
+  "vocab": {
+    "CPS": "Cost Per Sale",
+    "CPL": "Cost Per Lead",
+    "SubID": "Tham số theo dõi hiệu suất chiến dịch"
+  }
+}

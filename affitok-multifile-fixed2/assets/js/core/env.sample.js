@@ -1,0 +1,4 @@
+window.ENV = {
+  GOOGLE_API_KEY: "",
+  GEMINI_MODEL: "gemini-2.0-flash"
+};
